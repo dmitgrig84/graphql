@@ -1,0 +1,43 @@
+type Query {
+    employees(filter: EmployeeFilter): [Employee]
+}
+
+type Department {
+    id: ID!
+    name: String
+    employees: [Employee]
+}
+
+type Employee {
+    id: ID!
+    name: String
+    departmentId: String
+}
+
+input EmployeeFilter {
+   name : StringExpression
+   id : IntExpression
+
+     and: [EmployeeFilter!]
+     or: [EmployeeFilter!]
+     not: EmployeeFilter
+}
+
+
+# Define String expression
+input StringExpression {
+   equals: String
+   contains: String
+   in: [String!]
+}
+
+# Define Int Expression
+input IntExpression {
+   eq: Int
+   gt: Int
+   gte: Int
+   lt: Int
+   lte: Int
+   in: [Int!]
+   between: [Int!]
+}
